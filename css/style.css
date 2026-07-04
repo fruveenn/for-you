@@ -1,0 +1,793 @@
+/* ============================================
+   CSS RESET & GLOBAL VARIABLES
+   ============================================ */
+
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --accent: #ff6b9d;
+    --accent2: #c44dff;
+    --text: #e8e8f0;
+    --text2: #9e9eb8;
+    --gold: #f0c87b;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border-glass: rgba(255, 255, 255, 0.08);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   GLOW ORBS BACKGROUND
+   ============================================ */
+
+.glow-orb {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(150px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+}
+
+.orb-1 {
+    background: var(--accent);
+    top: -15%;
+    left: -10%;
+    animation: orbMove 10s ease-in-out infinite;
+}
+
+.orb-2 {
+    background: var(--accent2);
+    bottom: -15%;
+    right: -10%;
+    animation: orbMove 10s ease-in-out infinite reverse;
+}
+
+@keyframes orbMove {
+    0%, 100% { 
+        transform: translate(0, 0); 
+    }
+    33% { 
+        transform: translate(40px, -30px); 
+    }
+    66% { 
+        transform: translate(-30px, 20px); 
+    }
+}
+
+/* ============================================
+   PARTICLES
+   ============================================ */
+
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   FLOATING HEARTS
+   ============================================ */
+
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.float-heart {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: heartFloat 6s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0.3;
+        transform: translateY(-200px) rotate(15deg) scale(1.1);
+    }
+    100% {
+        transform: translateY(-400px) rotate(-10deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   PRELOADER
+   ============================================ */
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader-heart {
+    width: 60px;
+    height: 60px;
+    animation: heartBeat 0.8s ease infinite;
+}
+
+.preloader-heart svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--accent);
+}
+
+@keyframes heartBeat {
+    0%, 100% { 
+        transform: scale(1); 
+    }
+    15% { 
+        transform: scale(1.25); 
+    }
+    30% { 
+        transform: scale(1); 
+    }
+    45% { 
+        transform: scale(1.15); 
+    }
+    60% { 
+        transform: scale(1); 
+    }
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+
+.main-container {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+    text-align: center;
+    max-width: 620px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 1.5s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Badge */
+.hero-badge {
+    display: inline-block;
+    background: var(--glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: glowBadge 3s ease-in-out infinite;
+}
+
+@keyframes glowBadge {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(255, 107, 157, 0.1); 
+    }
+    50% { 
+        box-shadow: 0 0 35px rgba(255, 107, 157, 0.25); 
+    }
+}
+
+/* Title */
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+.hero-title .highlight {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.wave-emoji {
+    display: inline-block;
+    animation: waveHand 1.5s ease infinite;
+    font-size: 0.9em;
+}
+
+@keyframes waveHand {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    50% { transform: rotate(-5deg); }
+    75% { transform: rotate(15deg); }
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text2);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-subtitle .name-glow {
+    color: var(--accent);
+    font-weight: 600;
+    text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), #ff4081);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 45px rgba(255, 107, 157, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.97);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(255, 107, 157, 0.05);
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.15);
+}
+
+/* ============================================
+   SCROLL INDICATOR
+   ============================================ */
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounceDown 2s ease infinite;
+    opacity: 0.6;
+    z-index: 2;
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    border-right: 2px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    transform: rotate(45deg);
+}
+
+@keyframes bounceDown {
+    0%, 100% { 
+        transform: translateX(-50%) translateY(0); 
+    }
+    50% { 
+        transform: translateX(-50%) translateY(12px); 
+    }
+}
+
+/* ============================================
+   MODAL OVERLAY
+   ============================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   MODAL BOX
+   ============================================ */
+
+.modal {
+    background: var(--card);
+    border: 1px solid var(--border-glass);
+    border-radius: 24px;
+    padding: 40px 35px;
+    max-width: 580px;
+    width: 100%;
+    text-align: center;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+}
+
+/* Modal Scrollbar Styling */
+.modal::-webkit-scrollbar {
+    width: 4px;
+}
+.modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+.modal::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+/* Modal Emoji */
+.modal-emoji {
+    font-size: 4rem;
+    animation: bounceEmoji 0.6s ease infinite alternate;
+}
+
+@keyframes bounceEmoji {
+    from { 
+        transform: translateY(0); 
+    }
+    to { 
+        transform: translateY(-15px); 
+    }
+}
+
+/* Modal Title */
+.modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 15px 0;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+}
+
+/* Modal Message */
+.modal-message {
+    color: var(--text2);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.modal-message p {
+    margin-bottom: 18px;
+}
+
+/* ============================================
+   THE BIG QUESTION BOX
+   ============================================ */
+
+.question-box {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.08), rgba(196, 77, 255, 0.08));
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin: 25px 0;
+    position: relative;
+    animation: questionGlow 3s ease-in-out infinite;
+}
+
+@keyframes questionGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 107, 157, 0.1);
+        border-color: rgba(255, 107, 157, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 107, 157, 0.25);
+        border-color: rgba(255, 107, 157, 0.6);
+    }
+}
+
+.question-box-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.question-sparkle {
+    font-size: 1.8rem;
+    animation: sparkleRotate 2s linear infinite;
+}
+
+@keyframes sparkleRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.the-question {
+    font-size: 1.35rem;
+    color: var(--text);
+    text-align: center;
+    font-weight: 500;
+}
+
+.the-question .girlfriend-text {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.question-sub {
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.9rem;
+    margin-top: 12px;
+    font-style: italic;
+}
+
+/* ============================================
+   ANSWER BUTTONS
+   ============================================ */
+
+.answer-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-answer {
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #ff6b9d, #ff4081);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+}
+
+.btn-yes:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(255, 107, 157, 0.55);
+}
+
+.btn-shy {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text2);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-shy:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: rgba(255, 107, 157, 0.08);
+}
+
+/* ============================================
+   CLOSE BUTTON
+   ============================================ */
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: var(--text2);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+/* ============================================
+   SIGNATURE
+   ============================================ */
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-top: 20px;
+}
+
+/* ============================================
+   SPARKLE CURSOR EFFECT
+   ============================================ */
+
+.sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    animation: sparkleFade 1s ease forwards;
+    font-size: 1.2rem;
+    user-select: none;
+}
+
+@keyframes sparkleFade {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .modal {
+        padding: 30px 22px;
+        border-radius: 18px;
+    }
+    
+    .modal-title {
+        font-size: 1.5rem;
+    }
+    
+    .signature {
+        font-size: 1.7rem;
+    }
+    
+    .the-question {
+        font-size: 1.15rem;
+    }
+    
+    .the-question .girlfriend-text {
+        font-size: 1.3rem;
+    }
+    
+    .question-box {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.85rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .modal {
+        padding: 25px 16px;
+        border-radius: 14px;
+    }
+    
+    .modal-emoji {
+        font-size: 3rem;
+    }
+    
+    .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    .modal-message {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .the-question {
+        font-size: 1rem;
+    }
+    
+    .the-question .girlfriend-text {
+        font-size: 1.15rem;
+    }
+    
+    .answer-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-answer {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .signature {
+        font-size: 1.4rem;
+    }
+    
+    .question-box {
+        padding: 15px 10px;
+        margin: 20px 0;
+    }
+    
+    .hero-badge {
+        font-size: 0.7rem;
+        padding: 6px 15px;
+    }
+}
